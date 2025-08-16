@@ -69,6 +69,9 @@
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
 
+  /* theme-dependent */
+  --map-filter: grayscale(1) invert(1);
+
   /**
    * typography
    */
@@ -110,6 +113,42 @@
   --transition-2: 0.5s ease-in-out;
 
 }
+
+/* Light theme overrides */
+:root[data-theme="light"] {
+  /* solid */
+  --smoky-black: hsl(0, 0%, 98%);
+  --eerie-black-1: hsl(0, 0%, 100%);
+  --eerie-black-2: hsl(0, 0%, 100%);
+  --jet: hsl(0, 0%, 85%);
+  --white-1: hsl(0, 0%, 12%);
+  --white-2: hsl(0, 0%, 16%);
+  --light-gray: hsl(0, 0%, 35%);
+  --light-gray-70: hsla(0, 0%, 35%, 0.7);
+
+  /* gradients and shadows tuned for light */
+  --bg-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 100%) 3%,
+    hsl(0, 0%, 98%) 97%
+  );
+  --bg-gradient-jet: linear-gradient(
+    to bottom right,
+    hsla(0, 0%, 100%, 0.75) 0%,
+    hsla(0, 0%, 100%, 0) 100%
+  ), hsl(0, 0%, 100%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 90%) 0%,
+    hsla(0, 0%, 90%, 0) 50%
+  );
+
+  /* map appearance */
+  --map-filter: grayscale(0) invert(0);
+}
+
+/* Components with hard-coded backgrounds that need light override */
+[data-theme="light"] .navbar { background: hsla(0, 0%, 100%, 0.85); }
 
 
 
@@ -1142,7 +1181,7 @@ main {
   width: 100%;
   height: 100%;
   border: none;
-  filter: grayscale(1) invert(1);
+  filter: var(--map-filter);
 }
 
 .contact-form { margin-bottom: 10px; }
