@@ -202,3 +202,34 @@ if (themeToggleButton) {
     applyTheme(isLight ? 'dark' : 'light');
   });
 }
+
+// Profile avatar cycler
+(function () {
+  const avatarImg = document.getElementById('profile-avatar');
+  if (!avatarImg) return;
+
+  // List of available avatar images
+  const avatarSources = [
+    './assets/images/drcrack.jpg',
+    './assets/images/kofi-pic.jpg',
+    './assets/images/chris-pic.jpg',
+  ];
+
+  // Restore last selected avatar
+  let currentIndex = 0;
+  try {
+    const savedSrc = localStorage.getItem('selectedAvatarSrc');
+    const savedIndex = avatarSources.indexOf(savedSrc || '');
+    if (savedIndex >= 0) {
+      currentIndex = savedIndex;
+      avatarImg.src = avatarSources[currentIndex];
+    }
+  } catch (_) {}
+
+  avatarImg.style.cursor = 'pointer';
+  avatarImg.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % avatarSources.length;
+    avatarImg.src = avatarSources[currentIndex];
+    try { localStorage.setItem('selectedAvatarSrc', avatarImg.src.replace(location.origin + '/', './')); } catch (_) {}
+  });
+})();

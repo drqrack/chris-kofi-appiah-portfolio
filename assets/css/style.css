@@ -34,14 +34,14 @@
     hsla(240, 2%, 11%, 0) 100%
   ), hsl(240, 2%, 13%);
   --bg-gradient-yellow-1: linear-gradient(
-    to bottom right, 
-    hsl(45, 100%, 71%) 0%, 
-    hsla(36, 100%, 69%, 0) 50%
+    to bottom right,
+    hsl(220, 92%, 60%) 0%,
+    hsla(220, 92%, 60%, 0) 50%
   );
   --bg-gradient-yellow-2: linear-gradient(
-    135deg, 
-    hsla(45, 100%, 71%, 0.251) 0%, 
-    hsla(35, 100%, 68%, 0) 59.86%
+    135deg,
+    hsla(220, 92%, 60%, 0.25) 0%,
+    hsla(220, 85%, 58%, 0) 59.86%
   ), hsl(240, 2%, 13%);
   --border-gradient-onyx: linear-gradient(
     to bottom right, 
@@ -49,9 +49,9 @@
     hsla(0, 0%, 25%, 0) 50%
   );
   --text-gradient-yellow: linear-gradient(
-    to right, 
-    hsl(45, 100%, 72%), 
-    hsl(35, 100%, 68%)
+    to right,
+    hsl(220, 92%, 60%),
+    hsl(220, 85%, 58%)
   );
 
   /* solid */
@@ -63,8 +63,8 @@
   --smoky-black: hsl(0, 0%, 7%);
   --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
-  --orange-yellow-crayola: hsl(45, 100%, 72%);
-  --vegas-gold: hsl(45, 54%, 58%);
+  --orange-yellow-crayola: hsl(220, 82%, 56%);
+  --vegas-gold: hsl(220, 70%, 45%);
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
@@ -126,6 +126,15 @@
   --light-gray: hsl(0, 0%, 35%);
   --light-gray-70: hsla(0, 0%, 35%, 0.7);
 
+  /* accent palette tuned for light theme (blue to complement portrait suit) */
+  --orange-yellow-crayola: hsl(220, 82%, 56%);
+  --vegas-gold: hsl(220, 70%, 45%);
+  --text-gradient-yellow: linear-gradient(
+    to right,
+    hsl(220, 82%, 56%),
+    hsl(220, 70%, 50%)
+  );
+
   /* gradients and shadows tuned for light */
   --bg-gradient-onyx: linear-gradient(
     to bottom right,
@@ -149,6 +158,30 @@
 
 /* Components with hard-coded backgrounds that need light override */
 [data-theme="light"] .navbar { background: hsla(0, 0%, 100%, 0.85); }
+
+/* Improve avatar visibility on light background */
+[data-theme="light"] .avatar-box {
+  background: linear-gradient(to bottom right, hsl(220, 100%, 97%), hsl(0, 0%, 100%));
+  border: 1px solid hsl(0, 0%, 90%);
+  box-shadow: var(--shadow-2);
+}
+
+/* Show client logos in full color on light theme for visibility */
+[data-theme="light"] .clients-item img { filter: grayscale(0); }
+
+/* Icon/link color tuning for light theme */
+[data-theme="light"] .social-item .social-link { color: var(--orange-yellow-crayola); }
+
+/* Sidebar role badge visibility in light theme */
+[data-theme="light"] .info-content .title {
+  background: var(--orange-yellow-crayola);
+  color: #ffffff;
+}
+
+/* Tint service icons to accent color in light theme for consistency/visibility */
+[data-theme="light"] .service-icon-box img {
+  filter: invert(36%) sepia(84%) saturate(1800%) hue-rotate(205deg) brightness(95%) contrast(95%);
+}
 
 
 
@@ -234,6 +267,13 @@ article {
   color: var(--orange-yellow-crayola);
   box-shadow: var(--shadow-1);
   z-index: 1;
+}
+
+/* Slightly larger and clearer icons in light theme for visibility */
+[data-theme="light"] .icon-box {
+  width: 34px;
+  height: 34px;
+  color: var(--orange-yellow-crayola);
 }
 
 .icon-box::before {
@@ -360,7 +400,22 @@ main {
   transition: var(--transition-2);
 }
 
-.sidebar.active { max-height: 405px; }
+.sidebar.active { max-height: 405px; overflow-y: auto; }
+
+/* Sidebar scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: var(--onyx);
+  border-radius: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--orange-yellow-crayola);
+  border-radius: 6px;
+}
 
 .sidebar-info {
   position: relative;
@@ -373,6 +428,49 @@ main {
 .avatar-box {
   background: var(--bg-gradient-onyx);
   border-radius: 20px;
+}
+
+/* Animated accent ring around profile avatar */
+.avatar-box {
+  position: relative;
+  z-index: 0;
+}
+
+.avatar-box::before {
+  content: "";
+  position: absolute;
+  inset: -6px; /* ring thickness + gap */
+  border-radius: 26px; /* 20px + 6px to keep roundness */
+  background: conic-gradient(
+    from 0deg,
+    var(--orange-yellow-crayola) 0%,
+    hsla(220, 85%, 58%, 0.8) 25%,
+    hsla(220, 85%, 58%, 0.15) 50%,
+    hsla(220, 85%, 58%, 0.8) 75%,
+    var(--orange-yellow-crayola) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  padding: 4px; /* ring thickness */
+  animation: rotateRing 60s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(0, 115, 255, 0.35));
+  z-index: -1;
+}
+
+@keyframes rotateRing {
+  to { transform: rotate(360deg); }
+}
+
+/* Subtle breathing glow to make it unique */
+.avatar-box {
+  animation: avatarGlow 5s ease-in-out infinite;
+}
+
+@keyframes avatarGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(0, 115, 255, 0); }
+  50% { box-shadow: 0 0 20px rgba(0, 115, 255, 0.25); }
 }
 
 .info-content .name {
@@ -478,14 +576,14 @@ main {
 }
 
 .social-item .social-link {
-  /* color: var(--light-gray-70); */
-  color: black;
-  font-size: 18px;
+  color: var(--orange-yellow-crayola);
+  font-size: 22px;
+  transition: color var(--transition-1), transform var(--transition-1), text-shadow var(--transition-1);
 }
 
 
 /* .social-item .social-link:hover { color: var(--light-gray); } */
-.social-item .social-link:hover { color: var(--vegas-gold); }
+.social-item .social-link:hover { color: var(--vegas-gold); transform: translateY(-2px) scale(1.15); text-shadow: 0 0 10px currentColor; }
 
 
 
@@ -584,7 +682,7 @@ main {
 
 .service-icon-box { margin-bottom: 10px; }
 
-.service-icon-box img { margin: auto; }
+.service-icon-box img { margin: auto; filter: invert(36%) sepia(84%) saturate(1800%) hue-rotate(205deg) brightness(95%) contrast(95%); }
 
 .service-content-box { text-align: center; }
 
