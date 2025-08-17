@@ -212,7 +212,7 @@ if (themeToggleButton) {
   const avatarSources = [
     './assets/images/drcrack.jpg',
     './assets/images/kofi-pic.jpg',
-    './assets/images/chris-pic.jpg',
+    // './assets/images/chris-pic.jpg',
   ];
 
   // Restore last selected avatar
