@@ -146,6 +146,18 @@
     hsla(0, 0%, 100%, 0.75) 0%,
     hsla(0, 0%, 100%, 0) 100%
   ), hsl(0, 0%, 100%);
+  
+  /* Add hover gradients for light theme */
+  --bg-gradient-yellow-1: linear-gradient(
+    to bottom right,
+    hsl(220, 92%, 60%) 0%,
+    hsla(220, 92%, 60%, 0) 50%
+  );
+  --bg-gradient-yellow-2: linear-gradient(
+    135deg,
+    hsla(220, 92%, 60%, 0.25) 0%,
+    hsla(220, 85%, 58%, 0) 59.86%
+  ), hsl(0, 0%, 100%);
   --border-gradient-onyx: linear-gradient(
     to bottom right,
     hsl(0, 0%, 90%) 0%,
@@ -905,6 +917,17 @@ main {
 \*-----------------------------------*/
 
 .article-title { margin-bottom: 30px; }
+
+.download-cv-container {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.download-cv-btn {
+  max-width: 200px;
+  margin: 0 auto;
+}
 
 
 /**
