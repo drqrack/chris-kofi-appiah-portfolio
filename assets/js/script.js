@@ -210,7 +210,7 @@ if (themeToggleButton) {
 
  // List of available avatar images
   const avatarSources = [
-    './assets/images/drcrack.jpg',
+    // './assets/images/drcrack.jpg',
     // './assets/images/profile-pic.png',
     './assets/images/kofi-pic.jpg',
     // './assets/images/chris-pic.jpg',
