@@ -208,13 +208,13 @@ if (themeToggleButton) {
   const avatarImg = document.getElementById('profile-avatar');
   if (!avatarImg) return;
 
-  // List of available avatar images
-  // const avatarSources = [
-  //   './assets/images/drcrack.jpg',
-  //   './assets/images/profile-pic.png',
-  //   './assets/images/kofi-pic.jpg',
-  //   // './assets/images/chris-pic.jpg',
-  // ];
+ // List of available avatar images
+  const avatarSources = [
+    './assets/images/drcrack.jpg',
+    // './assets/images/profile-pic.png',
+    './assets/images/kofi-pic.jpg',
+    // './assets/images/chris-pic.jpg',
+  ];
 
   // Restore last selected avatar
   let currentIndex = 0;
